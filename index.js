@@ -92,7 +92,7 @@ function showCalendar(month, year) {
         cell.setAttribute("data-year", year);
         cell.setAttribute("data-month_name", months[month]);
         cell.className = `date-picker ${date}`;
-        cell.innerHTML = "<span>" + date + "</span>";
+        cell.innerHTML = date;
         if (
           date === today.getDate() &&
           year === today.getFullYear() &&
@@ -112,20 +112,19 @@ function date5(myDays) {
   const value = document.getElementById("value").value;
   const ele = document.getElementsByClassName(value);
   const allEle = document.getElementsByClassName("sel");
+  const all = document.getElementsByClassName("date-picker");
   if (value >= myDays || value < 1) {
     alert("Please enter a valid date!");
+  }
+  if (all[value - 1].innerHTML == value && allEle.length >= 1) {
+    allEle[0].classList.remove("sel");
+    all[value - 1].className += " sel";
   } else {
-    if (allEle.length >= 1) {
-      allEle[0].classList.remove("sel");
-      ele[0].className += " sel";
-    } else {
-      if (ele[0].className.split(" ").includes("sel")) {
-        ele[0].classList.remove("sel");
-        ele[0].className += " white";
-      } else {
-        ele[0].className += " sel";
-      }
+    if(all[value-1].className.split(" ").includes("sel")){
+   all[value-1].classList.remove("sel");
+   all[value-1].className += " white";
     }
+    all[value - 1].className += " sel";
   }
 }
 const btn = document.getElementsByClassName("button1");
